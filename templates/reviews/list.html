@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h1 class="hero-title" style="text-align:center;">Reviews</h1>
+
+<!-- FILTER BAR -->
+<div class="hero-card" style="max-width:900px; margin-bottom:25px;">
+
+    <form method="GET" class="filter-bar" style="display:flex; gap:15px;">
+
+        <input type="text"
+               name="q"
+               placeholder="Search comment..."
+               class="search-input"
+               value="{{ request.args.get('q','') }}">
+
+        <select name="place" class="search-input">
+            <option value="">Filter by Place</option>
+            {% for p in places %}
+                <option value="{{ p.place_id }}"
+                    {% if request.args.get('place') == p.place_id|string %}selected{% endif %}>
+                    {{ p.name }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <select name="rating" class="search-input">
+            <option value="">Rating</option>
+            {% for r in [5,4,3,2,1] %}
+                <option value="{{ r }}"
+                        {% if request.args.get('rating') == r|string %}selected{% endif %}>
+                        {{ r }} ⭐
+                </option>
+            {% endfor %}
+        </select>
+
+        <button class="glass-card" style="padding:10px 18px;color:white;">Filter</button>
+    </form>
+</div>
+
+
+<!-- ADD REVIEW BUTTON (only users) -->
+{% if session.get("user_role") == "user" %}
+<div style="text-align:center; margin-bottom:20px;">
+    <a href="/reviews/add" class="glass-card" style="padding:12px 20px; display:inline-block;color:white;">
+        ➕ Add Review
+    </a>
+</div>
+{% endif %}
+
+<!-- REVIEW GRID -->
+<div class="feature-grid">
+
+    {% for r in reviews %}
+    <div class="glass-card" style="padding:20px;">
+
+        <h3 class="card-title">{{ r.place_name }}</h3>
+
+        <p style="color:#00eaff; margin-bottom:5px;">
+            Rating: {{ r.rating }} ⭐
+        </p>
+
+        <p style="color:#ddd;">“{{ r.comment }}”</p>
+
+        <p style="color:#888; font-size:14px; margin-top:15px;">
+            {% if r.user_name %}
+                {% if session.get("user_role") == "authority" %}
+                    👤 {{ r.user_name }}
+                {% else %}
+                    👤 {{ "Anonymous User" if r.is_anon else r.user_name }}
+                {% endif %}
+            {% else %}
+                👤 Anonymous User
+            {% endif %}
+        </p>
+
+        <!-- OWNER CONTROLS -->
+        {% if session.get("user_id") == r.user_id %}
+            <div style="margin-top:10px;">
+                <a href="/reviews/edit/{{ r.review_id }}" class="glass-card" style="padding:8px 12px; background:#eed830;">
+                    ✏️ Edit
+                </a>
+                <a href="/reviews/delete/{{ r.review_id }}"
+                   class="glass-card"
+                   style="padding:8px 12px; background:#ff4d4d;"
+                   onclick="return confirm('Delete this review?')">
+                    🗑 Delete
+                </a>
+            </div>
+        {% endif %}
+
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

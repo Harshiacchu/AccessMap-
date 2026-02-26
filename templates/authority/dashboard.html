@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="hero-card">
+
+    <h1 class="hero-title">Authority Dashboard</h1>
+    <p class="hero-sub">Manage issues, features & accessibility insights</p>
+
+    <div style="margin-top:30px; text-align:left;">
+
+        <h2 style="color:#00eaff;">Issue Overview</h2>
+        <ul>
+            {% for row in severity_data %}
+                <li>{{ row.severity }}: {{ row.count }}</li>
+            {% endfor %}
+        </ul>
+
+        <h3 style="margin-top:20px; color:#22ff88;">Resolution Status</h3>
+        <ul>
+            {% for row in status_data %}
+                <li>{{ row.status }}: {{ row.count }}</li>
+            {% endfor %}
+        </ul>
+
+        <h3 style="margin-top:20px; color:#ff8888;">
+            Broken Accessibility Features: {{ broken_features }}
+        </h3>
+
+    </div>
+
+    <a href="/issues" class="glass-btn">Manage All Issues</a>
+    <a href="/authority/features" class="glass-btn">Manage Accessibility Features</a>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="hero-card" style="max-width:600px;">
+    <h2 class="hero-title">Report an Accessibility Issue</h2>
+
+    <form method="POST">
+
+        <label>Place:</label>
+        <select name="place_id" class="glass-input">
+            {% for p in places %}
+            <option value="{{ p.place_id }}">{{ p.name }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Issue Type</label>
+        <input type="text" style="width:95%;" class="glass-input" name="issue_type" required>
+
+        <label>Severity</label>
+        <select name="severity" class="glass-input">
+            <option>Low</option>
+            <option>Medium</option>
+            <option>High</option>
+        </select>
+
+        <label>Description</label>
+        <textarea class="glass-input" style="width:95%;" name="description" style="height:120px;"></textarea>
+
+        <hr style="opacity:0.3; margin:20px 0;">
+
+        <h3 style="color:white;">Media Evidence</h3>
+
+        <label>Media URL (Google Drive / Image / Video)</label>
+        <input class="glass-input" name="media_url" style="width:95%;" placeholder="https://drive.google.com/...">
+
+        <label>Media Type</label>
+        <select name="media_type" class="glass-input">
+            <option value="image">Image</option>
+            <option value="video">Video</option>
+        </select>
+
+        <button class="glass-btn" style="margin-top:20px;">Submit Issue</button>
+
+    </form>
+
+</div>
+{% endblock %}

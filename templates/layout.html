@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AccessMap+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <!-- Your Glassmorphism CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/glass.css') }}">
+
+    <style>
+        .flash-container {
+    max-width: 600px;
+    margin: 10px auto;
+}
+
+.flash {
+    padding: 12px 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    text-align: center;
+    color: white;
+}
+
+.flash-success {
+    background: #4CAF50;
+}
+
+.flash-error {
+    background: #E53935;
+}
+
+
+    </style>
+</head>
+
+<body>
+
+   
+
+
+
+    <!-- Floating Glass Navbar -->
+    <nav class="glass-nav">
+        <div class="nav-left">AccessMap+</div>
+
+        <ul class="nav-links">
+
+            {# ----------------------
+               HOME LOGIC
+               ---------------------- #}
+            {% if session.user_role == "user" %}
+                <li><a href="/dashboard-user">Home</a></li>
+            {% elif session.user_role == "authority" %}
+                <li><a href="/dashboard-authority">Home</a></li>
+            {% else %}
+                <li><a href="/">Home</a></li>
+            {% endif %}
+
+            {# ----------------------
+               COMMON LINKS (visible only after login)
+               ---------------------- #}
+            {% if session.user_role == "user" %}
+                <li><a href="/places">Places</a></li>
+                <li><a href="/issues/add">Report Issue</a></li>
+                <li><a href="/reviews/add">Add Review</a></li>
+
+            {% elif session.user_role == "authority" %}
+                <li><a href="/issues">Manage Issues</a></li>
+            {% endif %}
+
+            {# ----------------------
+               AUTH BUTTONS
+               ---------------------- #}
+            {% if session.user_role %}
+                <li><a href="/logout" class="logout-btn">Logout</a></li>
+            {% else %}
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Sign Up</a></li>
+            {% endif %}
+        </ul>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flash-container">
+        {% for category, msg in messages %}
+            <div class="flash flash-{{ category }}">{{ msg }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+    </nav>
+
+    
+
+    <!-- Page Content -->
+    <main class="content">
+        {% block content %}{% endblock %}
+    </main>
+
+    
+
+</body>
+</html>

@@ -1,0 +1,134 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="hero-card login-card">
+    <div class="login-title">Welcome Back</div>
+    <div class="login-sub">Sign in to AccessMap+</div>
+
+    <form method="POST" class="login-form">
+
+        <label>Email</label>
+        <input style="width:95%;" type="email" name="email" required>
+
+        <label>Password</label>
+        <input style="width:95%;" type="password" name="password" required>
+
+        <label>Login As:</label>
+        <select name="role" required>
+            <option value="user">User</option>
+            <option value="authority">Authority</option>
+        </select>
+
+        <button type="submit" class="btn-primary">Login</button>
+
+        <div class="signup-text">
+            Don't have an account?
+            <a href="/register" class="btn-link">Create one</a>
+        </div>
+
+    </form>
+    <!-- {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div style="
+        background:#ff4d4d;
+        color:white;
+        padding:10px;
+        border-radius:8px;
+        margin-bottom:10px;
+        text-align:center;
+        font-weight:600;">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %} -->
+
+</div>
+
+<style>
+    .login-card {
+        max-width: 420px;
+        margin: auto;
+        padding: 35px;
+    }
+
+    .login-title {
+        font-size: 30px;
+        font-weight: 700;
+        margin-bottom: 5px;
+        text-align: center;
+        color: #9a9999;
+    }
+
+    .login-sub {
+        font-size: 15px;
+        color: #d4d2d2;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .login-form label {
+        margin-top: 12px;
+        font-weight: 600;
+        color: #ede9e9;
+    }
+
+    .login-form input,
+    .login-form select {
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        margin-top: 6px;
+        background: #fafafa;
+        transition: 0.2s;
+    }
+
+    .login-form input:focus,
+    .login-form select:focus {
+        outline: none;
+        border-color: #5a67d8;
+        box-shadow: 0 0 8px rgba(90, 103, 216, 0.3);
+    }
+
+    .btn-primary {
+        width: 100%;
+        margin-top: 20px;
+        padding: 12px;
+        border: none;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        background: linear-gradient(135deg, #6a5acd, #836fff);
+        color: white;
+        transition: 0.25s;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(90, 103, 216, 0.35);
+    }
+
+    .signup-text {
+        text-align: center;
+        margin-top: 15px;
+        color: #5f5e5e;
+        font-size: 15px;
+    }
+
+    .btn-link {
+        color: #6a5acd;
+        font-weight: 600;
+        text-decoration: none;
+        margin-left: 5px;
+    }
+
+    .btn-link:hover {
+        text-decoration: underline;
+    }
+
+</style>
+
+{% endblock %}

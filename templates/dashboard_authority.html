@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="hero-card" style="max-width:700px;">
+
+    <h1 class="hero-title">Authority Dashboard</h1>
+    <p class="hero-sub">Manage accessibility reports, features & maintenance</p>
+
+    <div class="feature-grid" style="margin-top:30px;">
+
+        <!-- View All Issues -->
+        <div class="glass-card" onclick="window.location='/issues'">
+            <div class="card-icon">📢</div>
+            <div class="card-title">View All Issues</div>
+        </div>
+
+        <!-- Maintenance Tasks -->
+        <div class="glass-card" onclick="window.location='/maintenance'">
+            <div class="card-icon">🛠️</div>
+            <div class="card-title">Maintenance Tasks</div>
+        </div>
+
+        <!-- Manage Accessibility Features -->
+        <div class="glass-card" onclick="window.location='/features'">
+            <div class="card-icon">♿</div>
+            <div class="card-title">Manage Feature Types</div>
+        </div>
+
+        <!-- Places -->
+        <div class="glass-card" onclick="window.location='/places'">
+            <div class="card-icon">📍</div>
+            <div class="card-title">Accessible Places</div>
+        </div>
+
+        <!-- Authority Addition -->
+        <div class="glass-card" onclick="window.location='/authorities'">
+            <div class="card-icon">👤</div>
+            <div class="card-title">Manage Authorities</div>
+        </div>
+
+        <!-- Logout -->
+        <div class="glass-card" onclick="window.location='/logout'">
+            <div class="card-icon">🚪</div>
+            <div class="card-title">Logout</div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

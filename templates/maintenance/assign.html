@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="hero-card" style="max-width:600px;">
+    <h2 class="hero-title">Assign Maintenance Task</h2>
+
+    <form method="POST">
+
+        <label class="form-label">Select Feature</label>
+        <select name="instance_id" class="glass-input">
+            {% for f in features %}
+                <option value="{{ f.instance_id }}">
+                    {{ f.feature_type }} — {{ f.status }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <label class="form-label">Role</label>
+        <select name="role" class="glass-input">
+            <option>Maintenance</option>
+            <option>Inspection</option>
+            <option>Cleaning</option>
+        </select>
+
+        <button class="glass-btn" style="margin-top:20px;">Assign</button>
+    </form>
+</div>
+
+{% endblock %}

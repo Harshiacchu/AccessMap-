@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="hero-card" style="max-width:700px;">
+
+    <h1 class="hero-title">Maintenance Tasks</h1>
+
+    {% if tasks %}
+        <table class="table">
+            <tr>
+                <th>Place</th>
+                <th>Feature</th>
+                <th>Role</th>
+                <th>Since</th>
+                <th>Actions</th>
+            </tr>
+
+            {% for t in tasks %}
+            <tr>
+                <td>{{ t.place_name }}</td>
+                <td>{{ t.feature_type }}</td>
+                <td>{{ t.role }}</td>
+                <td>{{ t.since_date }}</td>
+
+                <td>
+                    <a href="/maintenance/delete/{{ t.place_id }}/{{ t.instance_id }}"
+                       style="color:#ff6b6b;"
+                       onclick="return confirm('Remove?')">Remove</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p style="color:#ccc; margin-top:20px;">No tasks assigned yet.</p>
+    {% endif %}
+
+</div>
+
+{% endblock %}

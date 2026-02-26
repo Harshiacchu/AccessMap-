@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="form-card">
+    <h2>📝 Issue Details</h2>
+
+    <p><strong>Place:</strong> {{ issue.place_name }}</p>
+    <p><strong>Issue Type:</strong> {{ issue.issue_type }}</p>
+    <p><strong>Severity:</strong> {{ issue.severity }}</p>
+    <p><strong>Status:</strong> {{ issue.status }}</p>
+    <p><strong>Description:</strong> {{ issue.description }}</p>
+
+
+    <p><strong>Created:</strong> {{ issue.created_at }}</p>
+
+    {% if issue.resolved_at %}
+    <p><strong>Resolved At:</strong> {{ issue.resolved_at }}</p>
+    {% endif %}
+
+    <h3>Media Attached</h3>
+
+{% if media %}
+    {% for m in media %}
+        <div style="margin-bottom:15px;">
+            <p style="font-size:14px; color:#ccc;">
+                <strong>URL:</strong> <a href="{{ m.url }}" target="_blank" style="color:#00eaff;">
+                    {{ m.url }}
+                </a>
+            </p>
+
+            {% if m.media_type == "image" %}
+                <img src="{{ m.url }}" style="max-width:220px; border-radius:10px;">
+            {% else %}
+                <video src="{{ m.url }}" controls style="max-width:260px; border-radius:10px;"></video>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% else %}
+    <p style="color:#aaa;">No media uploaded.</p>
+{% endif %}
+
+
+    <a href="/issues" class="back-link">← Back to Issues</a>
+</div>
+
+{% endblock %}

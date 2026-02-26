@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<div class="hero-card" style="max-width:500px;">
+    <h1 class="hero-title">Welcome!!</h1>
+
+    <div style="margin-top:25px;">
+        <a href="/issues" class="glass-card" style="padding:15px; display:block; margin:10px 0;color:#9e79e9;">
+            🛠 My Issues
+        </a>
+
+        <a href="/reviews" class="glass-card" style="padding:15px; display:block; margin:10px 0;color:#9e79e9;">
+            ⭐ View Reviews
+        </a>
+    </div>
+</div>
+
+
+<style>
+    .btn-logout {
+        display: inline-block;
+        margin-top: 15px;
+        background: #ff6b6b;
+        color: white;
+        padding: 10px 18px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 600;
+    }
+    .btn-logout:hover {
+        background: #ff5252;
+    }
+    </style>
+    
+
+{% endblock %}

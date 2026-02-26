@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="hero-card" style="max-width:700px;">
+    <h2 class="hero-title">Features at {{ place.name }}</h2>
+
+    <a href="/places/{{ place.place_id }}/features/add" class="glass-btn" style="margin-top:20px; display:inline-block;">
+        ➕ Add Feature
+    </a>
+
+    <table class="table">
+        <tr>
+            <th>Feature</th>
+            <th>Status</th>
+            <th>Last Checked</th>
+            <th>Actions</th>
+        </tr>
+
+        {% for f in features %}
+        <tr>
+            <td>{{ f.feature_type }}</td>
+            <td>{{ f.status }}</td>
+            <td>{{ f.last_checked }}</td>
+            <td>
+                <a href="/features/edit/{{ f.instance_id }}">Edit</a> |
+                <a href="/features/delete/{{ f.instance_id }}" onclick="return confirm('Delete?')">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</div>
+
+{% endblock %}

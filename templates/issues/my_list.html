@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2 style="text-align:center;">📌 My Reported Issues</h2>
+
+<table class="table">
+    <tr>
+        <th>Place</th>
+        <th>Type</th>
+        <th>Severity</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for i in issues %}
+    <tr>
+        <td>{{ i.place_name }}</td>
+        <td>{{ i.issue_type }}</td>
+        <td>{{ i.severity }}</td>
+        <td>{{ i.status }}</td>
+
+        <td>
+            <a href="/issues/{{ i.report_id }}">View</a> |
+            <a href="/issues/edit/{{ i.report_id }}">Edit</a> |
+            <a href="/issues/delete/{{ i.report_id }}" onclick="return confirm('Delete this report?')">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

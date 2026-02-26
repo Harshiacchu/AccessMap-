@@ -1,0 +1,115 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="hero-card login-card">
+    <div class="login-title">Create Account</div>
+    <div class="login-sub">Join AccessMap+</div>
+
+    <form method="POST" class="login-form">
+
+        <label>First Name</label>
+        <input style="width:95%;" type="text" name="first_name" required>
+
+        
+        <label>Last Name</label>
+        <input style="width:95%;" type="text" name="last_name" required>
+
+        <label>Email</label>
+        <input style="width:95%;" type="email" name="email" required>
+
+        <label>Password</label>
+        <input style="width:95%;" type="password" name="password" required>
+
+        <label>Disability Type</label>
+        <select name="disability" required>
+            <option value="Mobility">Mobility</option>
+            <option value="Visual">Visual</option>
+            <option value="Hearing">Hearing</option>
+            <option value="None">Prefer not to say</option>
+        </select>
+
+        <button type="submit" class="btn-primary">Sign Up</button>
+
+        <br/>
+        <div class="signup-text">
+            Already have an account?
+            <a href="/login" class="btn-link">Login</a>
+        </div>
+
+    </form>
+
+    
+
+
+</div>
+
+<style>
+    .login-card {
+        max-width: 450px;
+        margin: auto;
+        padding: 35px;
+    }
+
+    .login-title {
+        font-size: 30px;
+        font-weight: 700;
+        margin-bottom: 5px;
+        text-align: center;
+        color: #9a9999;
+    }
+
+    .btn-link {
+        color: #6a5acd;
+        font-weight: 600;
+        text-decoration: none;
+        margin-left: 5px;
+    }
+    
+    .login-sub {
+        font-size: 15px;
+        color: #d4d2d2;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .login-form label {
+        margin-top: 12px;
+        font-weight: 600;
+        color: #ede9e9;
+    }
+
+    .login-form input,
+    .login-form select {
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        margin-top: 6px;
+        background: #fafafa;
+        transition: 0.2s;
+    }
+
+    .btn-primary {
+        width: 100%;
+        margin-top: 20px;
+        padding: 12px;
+        border: none;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        background: linear-gradient(135deg, #6a5acd, #836fff);
+        color: white;
+        transition: 0.25s;
+    }
+
+    .signup-text {
+        text-align: center;
+        margin-top: 15px;
+        color: #8f8e8e;
+        font-size: 15px;
+    }
+
+</style>
+
+{% endblock %}

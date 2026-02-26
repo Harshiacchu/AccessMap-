@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="hero-card" style="max-width:600px;">
+    <h2 class="hero-title">Edit Feature Type</h2>
+
+    <form method="POST">
+        <label class="form-label">Feature Name</label>
+        <input type="text" 
+               name="feature_type"
+               value="{{ feature.feature_type }}"
+               style="width:95%;"
+               class="glass-input"
+               required>
+
+        <label class="form-label">Description</label>
+        <textarea style="width:95%;" name="description" class="glass-input textarea-fixed">
+            {{ feature.description }}
+        </textarea>
+
+        <button class="glass-btn">Update Feature</button>
+    </form>
+</div>
+
+{% endblock %}

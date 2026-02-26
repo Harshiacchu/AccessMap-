@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="hero-card" style="max-width:700px;">
+
+    <h2 class="hero-title">Review Details</h2>
+
+    <p><strong>Rating:</strong> ⭐ {{ review.rating }}</p>
+    <p><strong>Comment:</strong> {{ review.comment }}</p>
+
+    <h3 style="margin-top:20px;">Media</h3>
+
+    {% if media %}
+        {% for m in media %}
+            {% if m.media_type == "image" %}
+                <img src="{{ m.url }}" style="max-width:220px; border-radius:12px; margin:10px;">
+            {% else %}
+                <video src="{{ m.url }}" controls style="max-width:250px; margin:10px"></video>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <p>No media added.</p>
+    {% endif %}
+
+</div>
+
+{% endblock %}

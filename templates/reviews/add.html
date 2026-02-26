@@ -1,0 +1,136 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<style>
+    /* Page-specific styling — safe and isolated */
+    .review-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 30px;
+        border-radius: 25px;
+        background: rgba(15, 23, 42, 0.85);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(148,163,184,0.4);
+        box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+        text-align: center;
+    }
+
+    .review-title {
+        font-size: 32px;
+        font-weight: 800;
+        color: #f9fafb;
+        margin-bottom: 20px;
+    }
+
+    .form-label {
+        display: block;
+        text-align: left;
+        color: #e6e6e6;
+        font-weight: 600;
+        margin-top: 12px;
+        margin-bottom: 5px;
+        font-size: 15px;
+    }
+
+    .review-input,
+    .review-select,
+    .review-textarea {
+        width: 100%;
+        padding: 14px 16px;
+        border: 1px solid rgba(255,255,255,0.2);
+        border-radius: 12px;
+        background: rgba(255,255,255,0.08);
+        backdrop-filter: blur(12px);
+        color: white;
+        font-size: 15px;
+        outline: none;
+        box-sizing: border-box;
+    }
+
+    .review-select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+    }
+
+    .review-textarea {
+        height: 120px;
+        resize: none;
+    }
+
+    .review-input:focus,
+    .review-select:focus,
+    .review-textarea:focus {
+        border-color: #00eaff;
+        box-shadow: 0 0 10px #00eaff80;
+    }
+
+    .review-checkbox {
+        margin-top: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #e5e7eb;
+        font-size: 14px;
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: 14px;
+        margin-top: 20px;
+        border-radius: 14px;
+        border: 1px solid #00eaff;
+        background: rgba(0,234,255,0.25);
+        color: white;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.25s;
+    }
+
+    .submit-btn:hover {
+        background: rgba(0,234,255,0.4);
+        transform: translateY(-2px);
+    }
+</style>
+
+
+<div class="review-container">
+    <h2 class="review-title">Add Review</h2>
+
+    <form method="POST">
+
+        <label class="form-label">Place:</label>
+        <select name="place_id" class="review-select" required>
+            {% for p in places %}
+            <option value="{{ p.place_id }}">{{ p.name }}</option>
+            {% endfor %}
+        </select>
+
+        <label class="form-label">Rating (1–5):</label>
+        <input type="number" name="rating" min="1" max="5" class="review-input" required>
+
+        <label class="form-label">Comment:</label>
+        <textarea name="comment" class="review-textarea"></textarea>
+
+        <label>Media URL (optional)</label>
+<input type="text" name="media_url" style="width:95%;" class="glass-input">
+
+<label>Media Type</label>
+<select name="media_type" class="glass-input">
+    <option value="image">Image</option>
+    <option value="video">Video</option>
+</select>
+
+
+
+        <label class="review-checkbox">
+            <input type="checkbox" name="anonymous">
+            Post anonymously
+        </label>
+
+        <button class="submit-btn">Submit Review</button>
+    </form>
+</div>
+
+{% endblock %}

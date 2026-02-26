@@ -1,0 +1,118 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="hero-card" style="max-width:500px; padding:25px;">
+    <h2 class="hero-title">Edit Review</h2>
+
+    <form method="POST" style="width:100%;">
+
+        <label>Rating:</label>
+        <input type="number"
+               name="rating"
+               min="1" max="5"
+               value="{{ review.rating }}"
+               class="search-input strong-input"
+               style="width:90%;"
+               required>
+
+        <label>Comment:</label>
+        <textarea name="comment"
+                  class="search-input strong-input"
+                  style="height:100px; width:90%;">{{ review.comment }}</textarea>
+
+
+        <!-- =======================
+             EXISTING MEDIA
+        ========================= -->
+        <h3 style="margin-top:25px; color:white; font-size:18px;">Existing Media</h3>
+
+        {% if media|length == 0 %}
+            <div style="
+                width:90%;
+                padding:15px;
+                border:2px dashed #8a76f0;
+                border-radius:10px;
+                text-align:center;
+                color:#cfcfcf;
+                margin-bottom:20px;
+                font-size:14px;">
+                No media added yet.
+            </div>
+        {% else %}
+            {% for m in media %}
+                <div style="margin-bottom:15px;">
+
+                    {% if m.media_type == "image" %}
+                        <img src="{{ m.url }}"
+                             style="max-width:140px; 
+                                    border-radius:8px;
+                                    border:2px solid #9e79e9;">
+                    {% else %}
+                        <video src="{{ m.url }}"
+                               controls
+                               style="max-width:160px; 
+                                      border-radius:8px;
+                                      border:2px solid #9e79e9;"></video>
+                    {% endif %}
+
+                    <br>
+
+                    <a href="/reviews/media/delete/{{ m.media_id }}"
+                       class="glass-btn small-btn"
+                       style="background:#ff5c5c;
+                              padding:5px 10px;
+                              margin-top:6px;
+                              color:white;">
+                       Delete
+                    </a>
+
+                </div>
+            {% endfor %}
+        {% endif %}
+
+
+        <!-- =======================
+             ADD MEDIA
+        ========================= -->
+        <h3 style="margin-top:20px; color:white; font-size:18px;">Add More Media</h3>
+
+        <label>Media URL</label>
+        <input type="text"
+               name="new_media_url"
+               class="glass-input strong-input"
+               style="width:95%;">
+
+        <label>Media Type</label>
+        <select name="new_media_type"
+                class="glass-input strong-input"
+                style="width:100%;">
+            <option value="image">Image</option>
+            <option value="video">Video</option>
+        </select>
+
+        <!-- Submit Button -->
+        <button class="glass-card"
+                style="
+                    width:100%;
+                    padding:10px;
+                    margin-top:18px;
+                    color:white;
+                    font-weight:600;
+                    font-size:16px;
+                    text-align:center;">
+            Update Review
+        </button>
+
+    </form>
+</div>
+
+<style>
+    .narrow-input {
+        width: 95%;          /* shrink width */
+        margin: auto;        /* center it */
+        display: block;
+    }
+</style>
+
+
+{% endblock %}

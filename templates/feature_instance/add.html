@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="hero-card" style="max-width:600px;">
+    <h2 class="hero-title">Add Accessibility Feature to {{ place.name }}</h2>
+
+    <form method="POST">
+
+        <label class="form-label">Feature Type</label>
+        <select name="feature_id" class="glass-input" required>
+            {% for f in all_features %}
+            <option value="{{ f.feature_id }}">{{ f.feature_type }}</option>
+            {% endfor %}
+        </select>
+
+        <label class="form-label">Status</label>
+        <select name="status" class="glass-input">
+            <option value="Working">Working</option>
+            <option value="Broken">Broken</option>
+            <option value="Unavailable">Unavailable</option>
+        </select>
+
+        <button class="glass-btn" style="margin-top:15px;">Add Feature</button>
+    </form>
+</div>
+
+{% endblock %}

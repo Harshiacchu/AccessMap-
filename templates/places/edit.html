@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="hero-card" style="max-width:700px;">
+    <h2 class="hero-title">Edit Place</h2>
+
+    <form method="POST">
+
+        <input style="width:95%;background-color: rgb(6, 6, 6);"  class="search-input" name="name" value="{{ place.name }}" required><br><br>
+
+        <input style="width:95%;background-color: rgb(6, 6, 6);" class="search-input" name="country" value="{{ place.country }}" required><br><br>
+        <input style="width:95%;background-color: rgb(6, 6, 6);"  class="search-input" name="state" value="{{ place.state }}" required><br><br>
+        <input style="width:95%;background-color: rgb(6, 6, 6);"  class="search-input" name="city" value="{{ place.city }}" required><br><br>
+
+        <input style="width:95%;background-color: rgb(6, 6, 6);" class="search-input" name="street" value="{{ place.street }}"><br><br>
+        <input style="width:95%;background-color: rgb(6, 6, 6);"  class="search-input" name="zip_code" value="{{ place.zip_code }}"><br><br>
+
+        <input style="width:95%;background-color: rgb(6, 6, 6);" class="search-input" name="category" value="{{ place.category }}" required><br><br>
+
+        <input style="width:95%;background-color: rgb(6, 6, 6);"  class="search-input" name="latitude" value="{{ place.latitude }}"><br><br>
+        <input style="width:95%;background-color: rgb(6, 6, 6);" class="search-input" name="longitude" value="{{ place.longitude }}"><br><br>
+
+        <label style="color:white;">Verified: </label>
+        <input type="checkbox" name="verified" {% if place.verified %}checked{% endif %}><br><br>
+
+        <button class="glass-card" style="width:100%; color:white;padding:12px;">Update</button>
+    </form>
+</div>
+
+{% endblock %}

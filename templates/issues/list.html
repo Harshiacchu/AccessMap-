@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+
+<h2 style="text-align:center; margin-bottom:20px;">📋 Issue Reports</h2>
+
+<a class="btn-float" href="/issues/add">+ Report Issue</a>
+
+<table class="table">
+    <tr>
+        <th>Place</th>
+        <th>User</th>
+        <th>Type</th>
+        <th>Severity</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for i in issues %}
+    <tr>
+        <td>{{ i.place_name }}</td>
+        <td>
+            {% if session.user_role == "user" %}
+                {{ i.user_name }}
+            {% else %}
+                <span style="opacity:0.6;">Hidden</span>
+            {% endif %}
+        </td>
+                <td>{{ i.issue_type }}</td>
+        <td>{{ i.severity }}</td>
+        <td>{{ i.status }}</td>
+        <td>
+            <a href="/issues/{{ i.report_id }}" class="btn-purple">View</a>
+<a href="/issues/edit/{{ i.report_id }}" class="btn-purple">Edit</a>
+<a href="/issues/delete/{{ i.report_id }}" 
+   class="btn-purple-danger"
+   onclick="return confirm('Delete this issue?')">
+   Delete
+</a>
+
+
+            {% if session.user_role == "authority" and i.status != "Resolved" %}
+                | <a href="/issues/resolve/{{ i.report_id }}">Resolve</a>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

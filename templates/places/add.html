@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="hero-card" style="max-width:700px;">
+    <h2 class="hero-title">Add New Place</h2>
+
+    <form method="POST">
+
+        <input class="search-input" name="name" placeholder="Place Name" style="width:95%;background-color:rgb(55, 51, 105);color: black;"><br><br>
+
+        <input class="search-input" name="country" placeholder="Country" style="width:95%;background-color:rgb(55, 51, 105);color: black;" required><br><br>
+        <input class="search-input" name="state" placeholder="State" style="width:95%;background-color:rgb(55, 51, 105);color: black;" required><br><br>
+        <input class="search-input" name="city" placeholder="City" style="width:95%;background-color:rgb(55, 51, 105);color: black;" required><br><br>
+
+        <input class="search-input" name="street" placeholder="Street" style="width:95%;background-color:rgb(55, 51, 105);color: black;" ><br><br>
+
+        <input class="search-input" name="zip_code" placeholder="ZIP Code" style="width:95%;background-color:rgb(55, 51, 105);color: black;" ><br><br>
+
+        <input class="search-input" name="category" placeholder="Category" style="width:95%;background-color:rgb(55, 51, 105);color: black;" required><br><br>
+
+        <input class="search-input" name="latitude" style="width:95%;background-color:rgb(55, 51, 105);color: black;" placeholder="Latitude"><br><br>
+        <input class="search-input" name="longitude" style="width:95%;background-color:rgb(55, 51, 105);color: black;" placeholder="Longitude"><br><br>
+
+        <label style="color:white;">Verified: </label>
+        <input type="checkbox" name="verified"><br><br>
+
+        <button class="glass-card" style="width:100%; color: white; padding:12px;">Save</button>
+
+    </form>
+</div>
+
+{% endblock %}

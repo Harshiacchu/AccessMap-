@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="hero-card">
+    <div class="hero-title">AccessMap+</div>
+    <div class="hero-sub">Discover, Report & Improve Accessibility in Your City</div>
+
+    <div class="search-box">
+        <input type="text" 
+               class="search-input" 
+               id="searchInput" 
+               placeholder="Search accessible places...">
+    
+        <!-- Autocomplete dropdown -->
+        <div id="autocompleteBox" class="autocomplete-box"></div>
+    </div>
+    
+
+    <div class="feature-grid">
+
+        <div class="glass-card" onclick="window.location='/places'">
+            <div class="card-icon">📍</div>
+            <div class="card-title">Explore Places</div>
+        </div>
+
+        <div class="glass-card" onclick="window.location='/issues/add'">
+            <div class="card-icon">⚠️</div>
+            <div class="card-title">Report an Issue</div>
+        </div>
+
+        <div class="glass-card" onclick="window.location='/reviews/add'">
+            <div class="card-icon">⭐</div>
+            <div class="card-title">Add a Review</div>
+        </div>
+
+        <div class="glass-card" onclick="window.location='/dashboard-authority'">
+            <div class="card-icon">🛠️</div>
+            <div class="card-title">Authority Dashboard</div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    const input = document.getElementById("searchInput");
+    const box = document.getElementById("autocompleteBox");
+    
+    input.addEventListener("input", async () => {
+        const q = input.value.trim();
+
+        if (q.length === 0) {
+            box.style.display = "none";
+            box.innerHTML = "";
+            return;
+        }
+
+        const res = await fetch(`/search-places?q=${encodeURIComponent(q)}`);
+        const places = await res.json();
+
+        if (!places || places.length === 0) {
+            box.style.display = "none";
+            box.innerHTML = "";
+            return;
+        }
+
+        box.style.display = "block";
+        box.innerHTML = "";
+
+        places.forEach(p => {
+            const item = document.createElement("div");
+            item.className = "autocomplete-item";
+            item.innerHTML = `<strong>${p.name}</strong> <span>${p.city}</span>`;
+
+            item.onclick = () => {
+                window.location.href = `/places/${p.place_id}`;
+            };
+
+            box.appendChild(item);
+        });
+    });
+
+    // Hide autocomplete when clicking outside
+    document.addEventListener("click", (e) => {
+        if (!box.contains(e.target) && !input.contains(e.target)) {
+            box.style.display = "none";
+        }
+    });
+</script>
+
+
+
+{% endblock %}

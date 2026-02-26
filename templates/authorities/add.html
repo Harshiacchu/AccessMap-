@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="hero-card" style="max-width:500px;">
+    <h2 class="hero-title">Add Authority</h2>
+
+    <form method="POST">
+
+        <label>First Name</label>
+        <input style="width:95%;" class="glass-input" name="first_name" required>
+
+        <label>Last Name</label>
+        <input style="width:95%;" class="glass-input" name="last_name" required>
+
+        <label>Email</label>
+        <input style="width:95%;" class="glass-input" type="email" name="email" required>
+
+        <label>Phone</label>
+        <input style="width:95%;" class="glass-input" name="phone" required>
+
+        <label>Password</label>
+        <input style="width:95%;" class="glass-input" type="password" name="password" required>
+
+        <button class="glass-btn" style="margin-top:15px;">Create</button>
+    </form>
+<!-- 
+    {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div style="
+        background:#ff4d4d;
+        color:white;
+        padding:10px;
+        border-radius:8px;
+        margin-bottom:10px;
+        text-align:center;
+        font-weight:600;">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %} -->
+
+</div>
+
+{% endblock %}

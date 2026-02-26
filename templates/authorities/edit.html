@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="hero-card" style="max-width:500px;">
+    <h2 class="hero-title">Edit Authority</h2>
+
+    <form method="POST">
+
+        <label>First Name</label>
+        <input style="width:95%;" class="glass-input" name="first_name" value="{{ authority.first_name }}" required>
+
+        <label>Last Name</label>
+        <input style="width:95%;" class="glass-input" name="last_name" value="{{ authority.last_name }}" required>
+
+        <label>Email</label>
+        <input style="width:95%;"class="glass-input" type="email" name="email" value="{{ authority.email }}" required>
+
+        <label>Phone</label>
+        <input style="width:95%;" class="glass-input" name="phone" value="{{ authority.phone }}" required>
+
+        <button class="glass-btn" style="margin-top:15px;">Update</button>
+    </form>
+</div>
+
+{% endblock %}

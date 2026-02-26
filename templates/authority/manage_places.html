@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="hero-card">
+    <h1>Manage Place Features</h1>
+
+    <div class="feature-grid">
+    {% for p in places %}
+        <div class="glass-card" onclick="window.location='/places/{{p.place_id}}/features'">
+            <div class="card-title">{{ p.name }}</div>
+            <div class="card-sub">{{ p.city }} | {{ p.state }}</div>
+        </div>
+    {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

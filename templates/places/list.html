@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h1 class="hero-title" style="text-align:center;">Accessible Places</h1>
+
+{% if session.user_role == "authority" %}
+<div style="text-align:center; margin-bottom:20px;">
+    <a href="/places/add" class="glass-card" style="padding:12px 20px; display:inline-block;">
+        ➕ Add New Place
+    </a>
+</div>
+{% endif %}
+
+<div class="feature-grid">
+
+    {% for p in places %}
+    <div class="glass-card" onclick="window.location='/places/{{ p.place_id }}'">
+        <div class="card-title">{{ p.name }}</div>
+        <p style="color:#eee;">{{ p.city }}, {{ p.state }}</p>
+        <p style="color:#00eaff;">Category: {{ p.category }}</p>
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

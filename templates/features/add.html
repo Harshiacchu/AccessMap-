@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="hero-card" style="max-width:600px;">
+    <h2 class="hero-title">Add Feature Type</h2>
+
+    <form method="POST">
+        <label class="form-label">Feature Name</label>
+        <input type="text" style="width:95%;" name="feature_type" class="glass-input" required>
+
+        <label class="form-label">Description</label>
+        <textarea name="description" style="width:95%;" class="glass-input textarea-fixed"></textarea>
+
+        <button class="glass-btn">Save Feature</button>
+    </form>
+</div>
+
+{% endblock %}

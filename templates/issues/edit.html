@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="form-card">
+    <h2>✏️ Edit Issue</h2>
+
+    <form method="POST">
+
+        <label>Issue Type</label>
+        <input type="text" style="width:95%;" name="issue_type" value="{{ issue.issue_type }}" required>
+
+        <label>Severity</label>
+        <select name="severity">
+            <option {% if issue.severity=='Low' %}selected{% endif %}>Low</option>
+            <option {% if issue.severity=='Medium' %}selected{% endif %}>Medium</option>
+            <option {% if issue.severity=='High' %}selected{% endif %}>High</option>
+        </select>
+
+        <label>Status</label>
+        <select name="status">
+            <option {% if issue.status=='Open' %}selected{% endif %}>Open</option>
+            <option {% if issue.status=='In Progress' %}selected{% endif %}>In Progress</option>
+            <option {% if issue.status=='Resolved' %}selected{% endif %}>Resolved</option>
+            <option {% if issue.status=='Closed' %}selected{% endif %}>Closed</option>
+        </select>
+
+        <label>Description</label>
+        <textarea name="description" style="width:95%;">{{ issue.description }}</textarea>
+
+
+        <h3 style="margin-top:15px;">Existing Media</h3>
+
+{% for m in media %}
+    <div style="margin-bottom:10px;">
+        <p style="font-size:14px; color:#ccc;">{{ m.media_type }} — <a href="{{ m.url }}" target="_blank" style="color:#00eaff;">{{ m.url }}</a></p>
+
+        {% if m.media_type == "image" %}
+            <img src="{{ m.url }}" style="max-width:180px; border-radius:10px;">
+        {% else %}
+            <video src="{{ m.url }}" controls style="max-width:200px;"></video>
+        {% endif %}
+
+        <br>
+        <a href="/issues/media/delete/{{ m.media_id }}" 
+           style="color:#ff7777; font-size:14px;"
+           onclick="return confirm('Delete this media?')">Delete</a>
+    </div>
+{% endfor %}
+
+<h3>Add New Media (optional)</h3>
+<input type="text" name="new_media_url" class="glass-input" style="width:95%;" placeholder="Paste new media URL">
+<select name="new_media_type" class="glass-input" style="margin-top:6px;">
+    <option value="">Select Type</option>
+    <option value="image">Image</option>
+    <option value="video">Video</option>
+</select>
+
+
+
+        <button type="submit" class="btn-primary">Update Issue</button>
+
+    </form>
+</div>
+
+{% endblock %}

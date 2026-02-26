@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="hero-card" style="max-width:700px;">
+
+    <h1 class="hero-title">{{ place.name }}</h1>
+    <p class="hero-sub">{{ place.city }}, {{ place.state }} ({{ place.country }})</p>
+
+    <!-- ⭐ Public star rating -->
+    {% if avg_rating %}
+        <p style="color:#ffd369; font-size:22px;">
+            ⭐ {{ avg_rating }} / 5
+        </p>
+    {% else %}
+        <p style="color:#aaa;">No ratings yet</p>
+    {% endif %}
+
+    <!-- Accessibility Features -->
+    <h3>Accessibility Features</h3>
+
+    {% if features %}
+        <ul>
+        {% for f in features %}
+            <li>
+                <strong>{{ f.feature_type }}</strong> — {{ f.status }}
+                <br>
+                <small>{{ f.description }}</small>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No accessibility features added yet.</p>
+    {% endif %}
+
+    
+    <br>
+
+    <!-- Authority buttons -->
+    {% if session.user_role == "authority" %}
+        <a class="glass-card" href="/places/edit/{{ place.place_id }}" style="padding:12px; display:inline-block;background:rgb(107, 121, 164);">
+            ✏️ Edit
+        </a>
+
+        <a class="glass-card" href="/places/delete/{{ place.place_id }}" style="padding:12px; display:inline-block; background:rgb(215, 47, 47);">
+            🗑 Delete
+        </a>
+    {% endif %}
+
+    <hr style="margin:30px 0; border-color:#334;">
+
+    <!-- ⭐ Reviews (only for logged-in users & authorities) -->
+    {% if session.user_role %}
+    <h2 style="color:#f9fafb;">Reviews</h2>
+
+    {% if reviews %}
+        {% for r in reviews %}
+            <div class="glass-card" style="margin-top:15px; padding:18px; text-align:left;">
+                <p style="font-size:20px; color:#ffd369;">⭐ {{ r.rating }}/5</p>
+                <p>{{ r.comment }}</p>
+                <p style="color:#aaa; font-size:14px;">— {{ r.user_name }}</p>
+
+                <!-- {% if session.user_role == "user" and r.user_name != "Anonymous" %}
+                    <a href="/reviews/edit/{{ r.review_id }}" style="color:#00eaff;">Edit</a> |
+                    <a href="/reviews/delete/{{ r.review_id }}" style="color:#ff7777;" onclick="return confirm('Delete review?')">Delete</a>
+                {% endif %} -->
+            </div>
+        {% endfor %}
+    {% else %}
+        <p style="color:#aaa;">No reviews yet. Be the first!</p>
+    {% endif %}
+    {% endif %}
+
+    {% if session.user_role == "authority" %}
+    <a class="glass-card" href="/places/{{ place.place_id }}/features" style="padding:12px;">
+        ♿ Manage Features
+    </a>
+    {% endif %}
+
+    {% if session.user_role == "authority" %}
+    <a class="glass-card" href="/maintenance/assign/{{ place.place_id }}" 
+    style="padding:12px; display:inline-block;">
+        🛠 Assign Maintenance Task
+    </a>
+    {% endif %}
+
+
+</div>
+
+{% endblock %}
